@@ -13,23 +13,23 @@ Follow these steps to set up your environment and run the test suite on your loc
 ### 1. Set up a Virtual Environment (Optional but Recommended)
 Create and activate a virtual environment to keep your dependencies isolated:
 ```bash
-# Create the environment
+Create the environment
 python -m venv venv
 
-# Activate it (Windows)
+Activate it (Windows)
 .\venv\Scripts\activate
 
-# Activate it (macOS/Linux)
+ Activate it (macOS/Linux)
 source venv/bin/activate
 
-### 2. Install Dependencies
+2. Install Dependencies
 Use `pip` to install the specific versions of the libraries required for this project:
-```bash
+
 
 pip install -r requirements.txt
 
 pytest -v
-
+```
 
 ## How to Build and Run Tests with Docker
 
