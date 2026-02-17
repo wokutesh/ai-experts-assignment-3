@@ -27,14 +27,23 @@ class Client:
             headers = {}
 
         if api:
-            if not self.oauth2_token or (
-                isinstance(self.oauth2_token, OAuth2Token) and self.oauth2_token.expired
-            ):
+            # Check if we need to refresh. 
+            # We refresh if it's missing, if it's an expired object, 
+            # OR if it's a dictionary (like in the failing test).
+            needs_refresh = (
+                not self.oauth2_token or 
+                isinstance(self.oauth2_token, dict) or 
+                (isinstance(self.oauth2_token, OAuth2Token) and self.oauth2_token.expired)
+            )
+
+            if needs_refresh:
                 self.refresh_oauth2()
 
+            # Now that it's refreshed, it should be an OAuth2Token object
             if isinstance(self.oauth2_token, OAuth2Token):
                 headers["Authorization"] = self.oauth2_token.as_header()
 
+        # Build the request
         req = requests.Request(method=method, url=f"https://example.com{path}", headers=headers)
         prepared = self.session.prepare_request(req)
 

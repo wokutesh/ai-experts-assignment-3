@@ -1,65 +1,44 @@
-# AI Experts Assignment (Python)
+# AI Experts Assignment 3
 
-This assignment evaluates your ability to:
+This project consists of an application and a test suite designed to run in a clean, CI-style environment.
 
-- set up a small Python project to run reliably (locally + in Docker),
-- pin dependencies for reproducible installs,
-- write focused tests to reproduce a bug,
-- implement a minimal, reviewable fix.
+## Prerequisites
+* Python 3.9+
+* Docker Desktop (for containerized testing)
 
-## What you will do
+## How to Run Tests Locally
 
-### 1) Dockerfile (required)
+Follow these steps to set up your environment and run the test suite on your local machine:
 
-Create a `Dockerfile` so the project can run the test suite in a non-interactive, CI-style environment.
+### 1. Set up a Virtual Environment (Optional but Recommended)
+Create and activate a virtual environment to keep your dependencies isolated:
+```bash
+# Create the environment
+python -m venv venv
 
-Requirements:
+# Activate it (Windows)
+.\venv\Scripts\activate
 
-- requirements.txt exists and is used during build (pip install -r requirements.txt)
-- pytest must be included/pinned in requirements.txt
-- The image must run tests by default (use: `CMD ["python", "-m", "pytest", "-v"]`).
-- The build must install dependencies from `requirements.txt`.
+# Activate it (macOS/Linux)
+source venv/bin/activate
 
-### 2) requirements.txt (required)
+### 2. Install Dependencies
+Use `pip` to install the specific versions of the libraries required for this project:
+```bash
 
-Create a `requirements.txt` with pinned versions, using this format:
+pip install -r requirements.txt
 
-- `package==x.y.z`
+pytest -v
 
-### 3) README updates (required)
 
-Update this README to include:
+## How to Build and Run Tests with Docker
 
-- how to run the tests locally,
-- how to build and run tests with Docker.
+To ensure the tests run in a clean, non-interactive CI-style environment, use the following Docker commands:
 
-### 4) Find + fix a bug (required)
+### 1. Build the Docker Image
+This command creates an image named `assignment-3-final` based on the instructions in the `Dockerfile`. It will install all pinned dependencies from `requirements.txt`.
+```bash
+docker build -t assignment-3-final .
 
-There is a bug somewhere in this repository.
+docker run --rm assignment-3-final
 
-Your tasks:
-
-- Identify the bug through reading code and/or running tests.
-- Write tests that reproduce the bug (tests should fail on the current code).
-- Apply the smallest possible fix to make the tests pass.
-- Keep the change minimal and reviewable (no refactors).
-
-## Constraints
-
-- Keep changes minimal and reviewable.
-- Do not refactor unrelated code.
-- Do not introduce extra tooling unless required.
-- You may add tests and the smallest code change needed to fix the bug.
-
-### 5) EXPLANATION.md (required)
-
-Create `EXPLANATION.md` (max 250 words) containing:
-
-- **What was the bug?**
-- **Why did it happen?**
-- **Why does your fix solve it?**
-- **One realistic case / edge case your tests still don’t cover**
-
-## Submission
-
-- Submit a public GitHub repository URL containing your solution to the Google form link provided.
